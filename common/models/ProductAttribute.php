@@ -40,7 +40,7 @@ class ProductAttribute extends \yii\db\ActiveRecord
     }
     public function getTblSize()
     {
-        return $this->hasOne(TblSize::className(), ['idsize' => 'size']);
+        return $this->hasOne(Tblsize::className(), ['idsize' => 'size']);
     }
     /**
      * @inheritdoc

@@ -148,7 +148,7 @@
 														<div class="col-md-6">
 															<label>Size</label>
                                                             <?= $form->field($modeldetails, "[{$i}]size")->dropDownList(
-                                                                    ArrayHelper::map(TblSize::find()->all(),'idsize', 'size'),
+                                                                    ArrayHelper::map(Tblsize::find()->all(),'idsize', 'size'),
                                                                     ['prompt'=>'- Choose -']
                                                                 )->label(false)
                                                             ?>															

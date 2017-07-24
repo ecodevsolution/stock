@@ -67,7 +67,7 @@ class SiteController extends Controller
         $category = Category::find()
                     ->count();
         $product = ProductAttribute::find()
-                    ->count();
+                    ->sum('stock');
         $order = Order::find()
                     ->where(['<>','status',2])
                     ->count();
