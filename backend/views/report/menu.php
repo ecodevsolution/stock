@@ -29,7 +29,7 @@
               </div>
               <div class="dashboard_v4_box_title float-xs-right">
                   <h4>Total Income</h4>
-                  <p>Review your income by range period</p>
+                  <p>Review your income</p>
               </div>
           </div>
       </div>
@@ -42,7 +42,7 @@
               </div>
               <div class="dashboard_v4_box_title float-xs-right">
                   <h4>Yearly Sell</h4>
-                  <p>Review your selling by Year Period</p>
+                  <p>Review your selling</p>
               </div>
           </div>
       </div>

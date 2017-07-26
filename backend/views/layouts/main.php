@@ -104,11 +104,47 @@ $this->registerCss("
                                     </a>
                                 </div>
                             </div>
-                            <div class="user-dropdown">
-                                <div class="btn-group">
-                                    <a href="#" class="user-header dropdown-toggle" data-toggle="dropdown" data-animation="slideOutUp" aria-haspopup="true" aria-expanded="false">
-                                        <img src="components/image/avatar5_big.png" alt="<?= Yii::$app->user->identity->username; ?>" />
+							
+							 <div class="float-default chat">
+                                <div class="right-icon">
+                                    <a href="javascript:void(0)" data-toggle="dropdown" data-open="true" data-animation="slideOutUp" aria-expanded="false">
+                                    <img src="components/image/avatar5_big.png" alt="<?= Yii::$app->user->identity->username; ?>" />                                    
+
                                     </a>
+                                    <ul class="dropdown-menu userChat" data-plugin="custom-scroll" data-height="77">
+                                        <li>
+                                             <?= Html::a(
+													' 
+                                                <div class="media">
+                                                    <div class="media-left float-xs-left">
+                                                       <img src="components/image/avatar5_big.png" alt="<?= Yii::$app->user->identity->username; ?>" />
+                                                    </div>
+                                                    <div class="media-body">
+                                                         <h5>'.Yii::$app->user->identity->username.'</h5>
+														 <p>'.Yii::$app->user->identity->email.'</p>
+                                                        <div class="meta-tag text-nowrap">
+                                                           <i class="fa fa-sign-out">Logout</i>
+                                                        </div>
+                                                        <div class="status online"></div>
+                                                    </div>
+                                                </div>',
+												
+													['/site/logout'],
+													['data-method' => 'post']
+												) ?>                                            
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+							
+							
+							
+                            <!--<div class="user-dropdown">
+                                <div class="btn-group">
+                                    <div class="user-header dropdown-toggle" data-toggle="dropdown" data-animation="slideOutUp" aria-haspopup="true" aria-expanded="false">
+                                        <img src="components/image/avatar5_big.png" alt="<?= Yii::$app->user->identity->username; ?>" />
+                                    </div>
                                     <div class="dropdown-menu drop-profile">
                                         <div class="userProfile">
                                             <img src="components/image/avatar5_big.png" alt="<?= Yii::$app->user->identity->username; ?>" />
@@ -124,7 +160,7 @@ $this->registerCss("
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
