@@ -4,7 +4,7 @@
     use yii\helpers\ArrayHelper;
     use common\models\Category;
     use common\models\Brand;
-    use common\models\TblSize;
+    use common\models\Tblsize;
     use wbraganca\dynamicform\DynamicFormWidget;
 ?>
 
