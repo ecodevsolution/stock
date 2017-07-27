@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use common\models\User;
 
 AppAsset::register($this);
 
@@ -47,7 +48,16 @@ $this->registerCss("
   
   filter: alpha(opacity=40); /* For IE8 and earlier */
 }
+
 ");
+
+	   $connection = \Yii::$app->db;
+       $sql = $connection->createCommand("(SELECT 'logorder' description ,order_id,id,status,date FROM history_order ORDER BY date DESC LIMIT 2)
+											union all
+										  (SELECT 'logpurchase' description, sku,id,price,date  FROM purchase_order ORDER BY date DESC LIMIT 2)
+										 ");
+       $model = $sql->queryAll();
+	   	   
 
 ?>
     <?php $this->beginPage() ?>
@@ -102,6 +112,55 @@ $this->registerCss("
                                     <a href="#" data-plugin="fullscreen">
                                         <i class="arrow_expand"></i>
                                     </a>
+                                </div>
+                            </div>
+							<div class="float-default chat">
+                                <div class="right-icon">
+                                    <a href="javascript:void(0)" data-toggle="dropdown" data-open="true" data-animation="slideOutUp" aria-expanded="false">
+										<i class="fa fa-bell"></i>
+										<span style="
+												background-color: #d9534f;
+												color: #fff;
+												font-size: 75%;
+												border-radius: .25rem;
+												line-height: 10px;
+												width: 70%;
+												height: 15px;
+											">new</span>
+                                    </a>
+                                    <ul class="dropdown-menu userChat" data-plugin="custom-scroll" data-height="310">
+									<?php
+										foreach($model as $models):										
+											$user = User::findOne($models['id']);
+											if($models['description'] == 'logorder'){
+												$status = 'online';
+												$message = 'Transaction Number '.$models['order_id'];
+											}else{
+												$status = 'offline';
+												$message = 'Purchasing Item SKU '.$models['order_id'];
+											}
+									?>
+									   <li>
+                                            <a href="#">
+                                                <div class="media">
+                                                    <div class="media-left float-xs-left">
+                                                        <img src="components/image/avatar5_big.png" alt="message"/>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h5><?= $user->username; ?></h5>
+                                                        <p><?= $message; ?></p>
+                                                        <div class="meta-tag text-nowrap">
+                                                            <time datetime="<?= $models['date']?>T20:27:48+07:00" class="text-muted"><?= date('d M Y',strtotime($models['date'])); ?>
+                                                            </time>
+                                                        </div>
+                                                        <div class="status <?= $status; ?>"></div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+									<?php endforeach; ?>
+                                      
+                                    </ul>
                                 </div>
                             </div>
 							
