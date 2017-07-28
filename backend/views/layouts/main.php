@@ -52,9 +52,9 @@ $this->registerCss("
 ");
 
 	   $connection = \Yii::$app->db;
-       $sql = $connection->createCommand("(SELECT 'logorder' description ,order_id,id,status,date FROM history_order ORDER BY date DESC LIMIT 5)
+       $sql = $connection->createCommand("(SELECT 'logorder' description ,order_id,id,status,date FROM history_order ORDER BY date DESC LIMIT 2)
 											union all
-										  (SELECT 'logpurchase' description, sku,id,price,date  FROM purchase_order ORDER BY date DESC LIMIT 5)
+										  (SELECT 'logpurchase' description, sku,id,price,date  FROM purchase_order ORDER BY date DESC LIMIT 2)
 										 ");
        $model = $sql->queryAll();
 	   	   

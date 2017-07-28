@@ -116,7 +116,21 @@ $this->registerJs('
                 <div class="content dashboard_v4_project_list">
                     <div class="dashboard-header">
                         <h4 class="page-content-title float-xs-left">Profit/Loss Period <?= date('M Y') ?></h4>
-                      
+						<?php
+							$connection = \Yii::$app->db;
+							
+							$sqlxx = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) sell, 
+													(SELECT IFNULL(SUM(qty * price),0) FROM purchase_order  
+														WHERE MONTH(date) = MONTH(now()) AND YEAR(date) = YEAR(now())) buy,
+														
+								IFNULL(SUM(grandtotal),0) - 	(SELECT IFNULL(SUM(qty * price),0) FROM purchase_order  
+														WHERE MONTH(date) = MONTH(now()) AND YEAR(date) = YEAR(now())) TotalProfit
+								FROM `order` 
+								WHERE MONTH(date) = MONTH(now()) AND YEAR(date) = YEAR(now()) AND 
+								MONTH(date) = MONTH(now()) AND YEAR(date) = YEAR(now())  AND status <> 2");
+							$xx = $sqlxx->queryOne(); 
+						?>
+						<h5> &nbsp;  (<i style="font-size:12px">in <?= number_format($xx['sell'],0,".",".") ?></i>)  &nbsp; (<i style="font-size:12px">out <?= number_format($xx['buy'],0,".",".") ?></i>) </h5>
                     </div>
 
                     <div class="dashboard-box" >

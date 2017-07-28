@@ -681,7 +681,7 @@ class ProductController extends \yii\web\Controller
                     ->Andwhere(['color'=>$_POST['color']])
                     ->Andwhere(['size'=>$_POST['size']])
                     ->one();
-            $models->stock = $models->stock + $_POST['stock'];
+            $models->stock = $models->stock + $_POST['stock'];			
             $models->save();
 
             $model = Product::findOne($models->sku);
@@ -690,14 +690,14 @@ class ProductController extends \yii\web\Controller
              $purchase->sku = $models->sku;
              $purchase->id = Yii::$app->user->identity->id;
              $purchase->qty = $_POST['stock'];
-             $purchase->price = $model->price;
+             $purchase->price = $model->price * $_POST['stock'];
              $purchase->date =  date('Y-m-d');                
              $purchase->save();
 
             return $this->redirect(['list']);
        }
        $connection = \Yii::$app->db;
-       $sql = $connection->createCommand("SELECT *, e.size sz FROM product_attribute a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN brand d ON b.idbrand = d.idbrand JOIN tblsize e ON e.idsize = a.size");
+       $sql = $connection->createCommand("SELECT *, e.size sz, a.size idsz FROM product_attribute a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN brand d ON b.idbrand = d.idbrand JOIN tblsize e ON e.idsize = a.size");
        $model = $sql->queryAll();
 
        return $this->render('list',[            

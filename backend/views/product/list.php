@@ -102,7 +102,7 @@
                         </thead>
                         <tbody>                            
                             <?php foreach($model as $models): ?>
-                            <tr onclick="document.location = '#';" data-id="<?= $models['sku'].";".$models['color'].";".$models['size']; ?>" data-target="#ModalProduct" class="open-AddBookDialog" data-toggle="modal">
+                            <tr onclick="document.location = '#';" data-id="<?= $models['sku'].";".$models['color'].";".$models['idsz']; ?>" data-target="#ModalProduct" class="open-AddBookDialog" data-toggle="modal">
                                 <td>
                                     <?= $models['sku']; ?>
                                 </td>
@@ -170,7 +170,7 @@
                         </div>
                          <div class="form-group">
                             <label for="recipient-name" class="form-control-label">Stock</label>
-                            <input type="text" class="form-control" name="stock">
+                            <input type="text" class="form-control" required="required"  name="stock">
                         </div>
                          <?= Html::submitButton('Update', ['class' => 'btn btn-primary','style'=>'float:right']) ?>                        
                         <br/> <br/>
