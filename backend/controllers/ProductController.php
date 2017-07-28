@@ -697,7 +697,7 @@ class ProductController extends \yii\web\Controller
             return $this->redirect(['list']);
        }
        $connection = \Yii::$app->db;
-       $sql = $connection->createCommand("SELECT * FROM product_attribute a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN brand d ON b.idbrand = d.idbrand");
+       $sql = $connection->createCommand("SELECT *, e.size sz FROM product_attribute a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN brand d ON b.idbrand = d.idbrand JOIN tblsize e ON e.idsize = a.size");
        $model = $sql->queryAll();
 
        return $this->render('list',[            

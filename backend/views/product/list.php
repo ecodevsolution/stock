@@ -119,7 +119,7 @@
                                    <span style="background-color:<?= $models['color']; ?>;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
                                 </td>
                                 <td>
-                                    <?= $models['size'];  ?>
+                                    <?= $models['sz'];  ?>
                                 </td>
                                 <td>
                                     <?= $models['stock']; ?>
