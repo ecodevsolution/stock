@@ -277,7 +277,7 @@ $this->registerJs('
                                                             echo '{
                                                             value : '.$executes['category'].',
                                                             color : "'.$executes['category_color'].'",
-                                                            label : "'.$executes['name_category'].': '.$executes['category'].'",
+                                                            label : "'.substr($executes['name_category'],0,5).': '.$executes['category'].'",
                                                             labelColor : "white",
                                                             labelFontSize : "16"
                                                         },';
