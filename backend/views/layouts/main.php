@@ -118,7 +118,7 @@ $this->registerCss("
                                 <div class="right-icon">
                                     <a href="javascript:void(0)" data-toggle="dropdown" data-open="true" data-animation="slideOutUp" aria-expanded="false">
 										<i class="fa fa-bell"></i>
-										<span style="
+										<!--<span style="
 												background-color: #d9534f;
 												color: #fff;
 												font-size: 75%;
@@ -126,7 +126,7 @@ $this->registerCss("
 												line-height: 10px;
 												width: 70%;
 												height: 15px;
-											">new</span>
+											">new</span>-->
                                     </a>
                                     <ul class="dropdown-menu userChat" data-plugin="custom-scroll" data-height="310">
 									<?php
@@ -286,7 +286,7 @@ $this->registerCss("
 
 
             <footer id="footer">
-                Copyright&copy; 2017, All Rights Reserved.
+                Copyright&copy; <?= date('Y') ?> POS V1.2, All Rights Reserved.
             </footer>
 
         </div>

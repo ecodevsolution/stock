@@ -146,7 +146,8 @@ $this->registerJs('
                                         <div class="sparkline-inlinerange">5,3,6,4,5,3,5,7</div>
                                     </td>
                                     <td>
-                                        <h6><a id="profit"  href="?r=report/profit">Profit / Loss</a></h6>
+									
+                                        <h6><a id="profit"  href="?r=report/profit">Profit / Loss </a></h6>
                                         <p>Revenue minus or plus the cost of goods sold.</p>
                                     </td>
                                 </tr>
