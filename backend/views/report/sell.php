@@ -1,77 +1,70 @@
 <?php
-
-/* @var $this yii\web\View */
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\web\View;
-
-
-$this->registerJs('
-        $(document).ready(function(){
-            var myVar;
-           
-             $( "#home" ).click(function() {
-                myFunction(this);
-            });
-
-            function myFunction(div) {
-                $(".loader").toggle();
-                $(div).toggle();
-
-            }    
-        });
-    ');
-     
-       
-     $root = '@web';
-     $this->registerJsFile("https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-    ['depends' => [\yii\web\JqueryAsset::className()],
-    'position' => View::POS_HEAD]);
-    //   $this->registerJsFile($root."/components/plugins/arcseldon-jquery.sparkline/dist/jquery.sparkline.js",
-    //  ['depends' => [\yii\web\JqueryAsset::className()],
-    //  'position' => View::POS_END]);
-    //  $this->registerJsFile($root."/components/js/global/sparkline_chart.js",
-    //  ['depends' => [\yii\web\JqueryAsset::className()],
-    //  'position' => View::POS_END]);
-     $this->registerJsFile($root."/components/js/chart.js",
-     ['depends' => [\yii\web\JqueryAsset::className()],
-     'position' => View::POS_HEAD]);
+    /* @var $this yii\web\View */
+    use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
+    use yii\web\View;
     
-    $connection = \Yii::$app->db;       
+    
+    $this->registerJs('
+            $(document).ready(function(){
+                var myVar;
+               
+                 $( "#home" ).click(function() {
+                    myFunction(this);
+                });
+    
+                function myFunction(div) {
+                    $(".loader").toggle();
+                    $(div).toggle();
+    
+                }    
+            });
+        ');
+         
+           
+         $root = '@web';
+         $this->registerJsFile("https://code.jquery.com/ui/1.12.1/jquery-ui.js",
+        ['depends' => [\yii\web\JqueryAsset::className()],
+        'position' => View::POS_HEAD]);
 
-
-?>
+         $this->registerJsFile($root."/components/js/chart.js",
+         ['depends' => [\yii\web\JqueryAsset::className()],
+         'position' => View::POS_HEAD]);
+        
+        $connection = \Yii::$app->db;       
+    
+    
+    ?>
 <style>
     .loading-overlay{
-        position: absolute;
-        left: 0; 
-        top: 0; 
-        right: 0; 
-        bottom: 0;
-        z-index: 2;
-        background: rgba(255,255,255,0.7);
+    position: absolute;
+    left: 0; 
+    top: 0; 
+    right: 0; 
+    bottom: 0;
+    z-index: 2;
+    background: rgba(255,255,255,0.7);
     }
     .overlay-content {
-        position: absolute;
-        transform: translateY(-50%);
-        -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        top: 50%;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: #555;
+    position: absolute;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #555;
     }
 </style>
-
- <script>
+<script>
     $(function() {
         $("#datepicker1").datepicker({ dateFormat: 'yy-mm-dd' });
     });
     $(function() {
         $("#datepicker2").datepicker({ dateFormat: 'yy-mm-dd' });
     });
-
+    
     function getUsers(tgl_awal,tgl_akhir,payment){
         $.ajax({
             type: 'POST',
@@ -86,104 +79,92 @@ $this->registerJs('
             }
         });
     }
-
-  
+    
+    
 </script>
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <div class="dashboard_v4_box_block">
-                <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTable">Primary</button>-->
-                <a href="<?= Yii::$app->homeUrl; ?>"  id="home">
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="content">
-                            <div class="dashboard_v4_box_icon float-xs-left primary_box">
-                                <i class="fa fa-home"></i>
-                            </div>
-                            <div class="dashboard_v4_box_title float-xs-right">
-                                <h4>Dashboard</h4>                                
-                            </div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="dashboard_v4_box_block">
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTable">Primary</button>-->
+            <a href="<?= Yii::$app->homeUrl; ?>"  id="home">
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="content">
+                        <div class="dashboard_v4_box_icon float-xs-left primary_box">
+                            <i class="fa fa-home"></i>
+                        </div>
+                        <div class="dashboard_v4_box_title float-xs-right">
+                            <h4>Dashboard</h4>
                         </div>
                     </div>
-                </a>
-                <?php
-                    include "menu.php";
+                </div>
+            </a>
+            <?php
+                include "menu.php";
                 ?>
-            </div>
         </div>
-        
-           
-            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboard_v4_block">
-                <div class="content dashboard_v4_project_list">
-                    <div class="dashboard-header">
-                        <h4 class="page-content-title float-xs-left">Top Period <?= date('M Y') ?>  By Category</h4>
-                       
-                    </div>
-                     <?php
-                                                           
-                        $query = $connection->createCommand("SELECT COUNT(b.idcategory) category, c.name_category, c.category_color FROM order_detail a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN `order` d ON a.order_no = d.order_no WHERE YEAR(d.date) = YEAR(now()) AND d.status <> 2 GROUP BY c.name_category, c.category_color");
-                        $execute = $query->queryAll();
-                    ?>  
-                    <div class="dashboard-box dashboard_v4_project_block">
-                        <table class="table  table-striped">
-                            <tbody>
-                                 <div class="dashboard-action" style="text-align: center">
-                                     <div class="sparkline-pie-gray">
-                                       
-                                         
-                                       <canvas id="myChart" width="350px" height="290px"></canvas>
-                                       <script>
-                                              $(document).ready(function () {
-                                                var pieData = [
-                                                     <?php 
-                                                        foreach($execute as $executes):
-                                                            echo '{
-                                                            value : '.$executes['category'].',
-                                                            color : "'.$executes['category_color'].'",
-                                                            label : "'.$executes['name_category'].': '.$executes['category'].'",
-                                                            labelColor : "white",
-                                                            labelFontSize : "16"
-                                                        },';
-                                                        endforeach;
-                                                    ?>];
-
-                                                    ctx = $("#myChart").get(0).getContext("2d");
-                                                    myNewChart = new Chart(ctx).Pie(pieData);
-                                                });
-                                       </script>
-                                     </div>
-                                </div>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    </div>
+    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboard_v4_block">
+        <div class="content dashboard_v4_project_list">
+            <div class="dashboard-header">
+                <h4 class="page-content-title float-xs-left">Top Period <?= date('M Y') ?>  By Category</h4>
             </div>
-            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboard_v4_block2">
-                <div class="content dashboard_v4_project_list">
-                    <div class="dashboard-header">
-                        <h4 class="page-content-title float-xs-left">Income Period <?= date('M Y') ?></h4>
-                      
-                    </div>
-
-                    <div class="dashboard-box">
-                        <div id="dashboard_v4_revenue_chart" class="dashboard_v4_revenue_chart"></div>
-                    </div>
-                </div>
+            <?php
+                $query = $connection->createCommand("SELECT COUNT(b.idcategory) category, c.name_category, c.category_color FROM order_detail a JOIN product b ON a.sku = b.sku JOIN category c ON b.idcategory = c.idcategory JOIN `order` d ON a.order_no = d.order_no WHERE YEAR(d.date) = YEAR(now()) AND d.status <> 2 GROUP BY c.name_category, c.category_color");
+                $execute = $query->queryAll();
+                ?>  
+            <div class="dashboard-box dashboard_v4_project_block">
+                <table class="table  table-striped">
+                    <tbody>
+                        <div class="dashboard-action" style="text-align: center">
+                            <div class="sparkline-pie-gray">
+                                <canvas id="myChart" width="350px" height="290px"></canvas>
+                                <script>
+                                    $(document).ready(function () {
+                                      var pieData = [
+                                           <?php 
+                                        foreach($execute as $executes):
+                                            echo '{
+                                            value : '.$executes['category'].',
+                                            color : "'.$executes['category_color'].'",
+                                            label : "'.$executes['name_category'].': '.$executes['category'].'",
+                                            labelColor : "white",
+                                            labelFontSize : "16"
+                                        },';
+                                        endforeach;
+                                        ?>];
+                                    
+                                          ctx = $("#myChart").get(0).getContext("2d");
+                                          myNewChart = new Chart(ctx).Pie(pieData);
+                                      });
+                                </script>
+                            </div>
+                        </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-xs-12 dashboard_v4_block2">
+        <div class="content dashboard_v4_project_list">
+            <div class="dashboard-header">
+                <h4 class="page-content-title float-xs-left">Income Period <?= date('M Y') ?></h4>
+            </div>
+            <div class="dashboard-box">
+                <div id="dashboard_v4_revenue_chart" class="dashboard_v4_revenue_chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-   
-            
-    <?php
+<?php
     $connection = \Yii::$app->db;
     
     $sql_jan = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 1 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $jan = $sql_jan->queryOne();   
-   
+    
     $sql_feb = $connection->createCommand("SELECT  IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 2 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $feb = $sql_feb->queryOne();   
-   
+    
     $sql_mar = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 3 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $mar = $sql_mar->queryOne();   
     
@@ -195,7 +176,7 @@ $this->registerJs('
     
     $sql_jun = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 6 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $jun = $sql_jun->queryOne();   
-   
+    
     $sql_jul = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 7 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $jul = $sql_jul->queryOne();   
     
@@ -207,13 +188,13 @@ $this->registerJs('
     
     $sql_okt = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 10 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $okt = $sql_okt->queryOne();   
-   
+    
     $sql_nov = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 11 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $nov = $sql_nov->queryOne();   
     
     $sql_dec = $connection->createCommand("SELECT IFNULL(SUM(grandtotal),0) grandtotal FROM `order` WHERE MONTH(date) = 12 AND YEAR(date) = YEAR(now()) AND status <> 2");
     $dec = $sql_dec->queryOne();   
-
+    
     $this->registerJs('  
     ! function(t, e, o) {
     "use strict";
@@ -310,6 +291,4 @@ $this->registerJs('
             a(this, i, l)
         });
     }(document, window, jQuery);');
-   ?>
-   
-   
+    ?>
